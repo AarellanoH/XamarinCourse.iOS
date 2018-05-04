@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo-list", "Todo-list\Todo-list.csproj", "{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Release|iPhone.ActiveCfg = Release|iPhone
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Release|iPhone.Build.0 = Release|iPhone
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{ED7EB15B-FD21-4DF5-86DA-22EB1922CCEA}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal
