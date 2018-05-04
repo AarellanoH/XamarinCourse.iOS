@@ -7,9 +7,11 @@ namespace Todolist
     public class TaskDataSource : UITableViewSource
     {
         string strCellId = "CellId";
+        private UIViewController owner;
 
-        public TaskDataSource()
+        public TaskDataSource(UIViewController owner)
         {
+            this.owner = owner;
         }
 
 
@@ -33,6 +35,20 @@ namespace Todolist
         {
             return TaskDAO.lstTasks.Count;
         }
-        #endregion
-    }
+
+		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
+            //Sacar task de la lista del DAO
+            TaskModel task = TaskDAO.lstTasks[indexPath.Row];
+
+            //Navegar al TaskForm asignando un task para editar
+            TaskFormViewController taskFormVC =
+                this.owner.Storyboard.InstantiateViewController("TaskFormViewController")
+                    as TaskFormViewController;
+            taskFormVC.task = task;
+            this.owner.NavigationController.PushViewController(taskFormVC, true);
+		}
+
+		#endregion
+	}
 }

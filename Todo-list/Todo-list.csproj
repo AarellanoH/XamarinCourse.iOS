@@ -108,6 +108,10 @@
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="TaskDataSource.cs" />
     <Compile Include="TaskDAO.cs" />
+    <Compile Include="TaskFormViewController.cs" />
+    <Compile Include="TaskFormViewController.designer.cs">
+      <DependentUpon>TaskFormViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

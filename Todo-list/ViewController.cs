@@ -15,32 +15,23 @@ namespace Todolist
         {
             base.ViewDidLoad();
 
+            this.tvTasks.Source = new TaskDataSource(this);
 
-            this.tvTasks.Source = new TaskDataSource();
-
-            //Imprimir en consola
-            this.btnSave.TouchUpInside += (object sender, EventArgs e) => 
+            //Funcionalidad boton new task, te lleva a la otra pantalla
+            this.btnNew.TouchUpInside += delegate 
             {
-                //Extraer el titulo y la descripcion
-                string strTitle = this.tfTitle.Text;
-                string strDescription = this.txvDescription.Text;
-
-                //Construir task y guardarlo
-                TaskModel task = new TaskModel(strTitle, strDescription);
-                TaskDAO.addTask(task);
-
-                //Limpiar los inputs
-                this.tfTitle.Text = String.Empty;
-                this.txvDescription.Text = String.Empty;
-
-                //Actualizar la tabla
-                this.tvTasks.ReloadData();
+                //Instanciar Task Form ViewController
+                TaskFormViewController taskFormVC =
+                    this.Storyboard.InstantiateViewController
+                        ("TaskFormViewController") as TaskFormViewController;
+                this.NavigationController.PushViewController(taskFormVC, true);
             };
         }
 
 		public override void ViewWillAppear(bool animated)
 		{
             base.ViewWillAppear(animated);
+            this.tvTasks.ReloadData();
 		}
 
 	}
