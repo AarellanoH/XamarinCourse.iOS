@@ -114,7 +114,6 @@ namespace Todolist
                 //Reflejar en la etiqueta
                 this.lblPercentage.Text = intPercentage.ToString() + "%";
 
-
                 if (intPercentage == 100)
                 {
                     this.switchDone.SetState(true, true);

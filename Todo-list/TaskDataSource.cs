@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Foundation;
 using UIKit;
 
@@ -8,10 +9,45 @@ namespace Todolist
     {
         string strCellId = "CellId";
         private UIViewController owner;
+        private List<TaskModel> lstTasksToShow;
 
-        public TaskDataSource(UIViewController owner)
+        public TaskDataSource(UIViewController owner, EnumTasksFilter enumTasksFilter)
         {
             this.owner = owner;
+            this.lstTasksToShow = new List<TaskModel>();
+
+            //Revisar todas las tasks del DAO para realizar el filtrado
+            foreach(TaskModel task in TaskDAO.lstTasks)
+            {
+                /*CASE*/
+                if (enumTasksFilter == EnumTasksFilter.All)
+                {
+                    this.lstTasksToShow.Add(task);
+                }
+                else if (enumTasksFilter == EnumTasksFilter.ToDo)
+                {
+                    if (task.intPercentage == 0)
+                    {
+                        this.lstTasksToShow.Add(task);
+                    }
+                }
+                else if (enumTasksFilter == EnumTasksFilter.Doing)
+                {
+                    if (task.intPercentage > 0 &&
+                        task.intPercentage < 100)
+                    {
+                        this.lstTasksToShow.Add(task);
+                    }
+                }
+                else if (enumTasksFilter == EnumTasksFilter.Done)
+                {
+                    if (task.boolDone)
+                    {
+                        this.lstTasksToShow.Add(task);
+                    }
+                }
+                /*END-CASE*/
+            }
         }
 
 
@@ -22,24 +58,23 @@ namespace Todolist
             UITableViewCell cell = tableView.DequeueReusableCell(this.strCellId);
 
             //Obtener la task de acuerdo al row en el que se encuentra la table
-            TaskModel task = TaskDAO.lstTasks[indexPath.Row];
+            TaskModel task = this.lstTasksToShow[indexPath.Row];
 
             //Desplegar el titulo de la task en la celda
             cell.TextLabel.Text = task.strTitle;
 
             return cell;
-
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            return TaskDAO.lstTasks.Count;
+            return this.lstTasksToShow.Count;
         }
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-            //Sacar task de la lista del DAO
-            TaskModel task = TaskDAO.lstTasks[indexPath.Row];
+            //Sacar task de la lista calculada
+            TaskModel task = this.lstTasksToShow[indexPath.Row];
 
             //Navegar al TaskForm asignando un task para editar
             TaskFormViewController taskFormVC =
@@ -51,4 +86,12 @@ namespace Todolist
 
 		#endregion
 	}
+
+    public enum EnumTasksFilter
+    {
+        All,
+        ToDo,
+        Doing,
+        Done
+    }
 }
